@@ -1,4 +1,5 @@
-# Daniel's project
+const generateMarkdown = (data) => {
+    return `# ${data.title}
 ## Table of Contents
 * [Descrition](#Description)
 * [Installation](#Installation)
@@ -10,19 +11,23 @@
 * [Github](#Github)
 -----------------------------------------------------------------
 ## Descrition
-Description of proj
+${data.description}
 ## Installation
-Instruction on proj
+${data.installation}
 ## Usage
-Example on proj
+${data.usage}
 ## Credits
-DAniel
+${data.credits}
 ## License
-[![License](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![License](https://img.shields.io/badge/License-${data.license}-blue.svg)](https://opensource.org/licenses/${data.license})
 ## Contributing
-Example ot add
+${data.contributing}
 ## Test
-Test instruction
+${data.test}
 ## Github
-https://github.com/Gigubt  
+https://github.com/${data.github}  
     
+`
+}
+
+module.exports = generateMarkdown
