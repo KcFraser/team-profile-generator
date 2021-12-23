@@ -1,16 +1,14 @@
-
-
-class Enginner {
-  constructor(name, weapon) {
-    super(name);
-
-    this.weapon = weapon;
-    this.potion = new Potion();
+class Engineer {
+  constructor (id, name, email, github) {
+    super (id, name, email)
+    this.github= github
   }
-
-  getDescription() {
-    return `A ${this.name} holding a ${this.weapon} has appeared!`;
+  promptRole() {
+    return "Engineer"
   }
-}
+  promptGithub() {
+    return this.github
+  }
+} 
 
-module.exports = Enemy;
+module.exports = Engineer;
