@@ -15,7 +15,7 @@ const newStaffData = [];
 
 //Array of questions asked to users
 const questions = () => {
-  const answers =   
+  const answer =   
    inquirer.prompt([
         {
             type: "input",
@@ -37,37 +37,33 @@ const questions = () => {
             message: "Please select your role.",
             choices: ["Intern", "Engineer", "Manager"],
         },
-    ]).then(answers => {
-        console.log(answers);
+    ]).then(answer => {
+        console.log(answer);
     })
 }
-
     questions()
-//  console.log(answers);
+
 
 // If intern has been selected than proceed to answer these questions
 if (answer.role === "Engineer") {
-    const githubAnswer = 
-    inquirer.prompt([
+    const githubAnswer = inquirer
+    .prompt([
         {
         type: "input",
         name: "github",
         message: "Enter your Github user name.",
-        }  
-    ]).then(answers => {
-        console.log(answers);
-    })
-    githubAnswer()
-
+        },  
+     ])
+     
     const newEngineer = new Engineer(
         answer.name,
-        EngineerAnswer.school,
+        githubAnswer.github,
         answer.id,
         answer.email,
     );
     newNewHireMemberData.push(newEngineer);
 
-// If manaer has been selected than proceed to answer these questions
+// If manager has been selected than proceed to answer these questions
 }else if (answer.role === "Manager") {
     const managerAnswer = 
      inquirer.prompt([
@@ -75,17 +71,57 @@ if (answer.role === "Engineer") {
         type: "input",
         name: "officeNumber",
         message: "What is your office number?",
-        }  
-    ]).then(answers => {
-        console.log(answers);
-    })
-
+        }, 
+    ])
+    
     const newManager = new Manager(
         answer.name,
-        ManagerAnswer.school,
+        managerAnswer.officeNumber,
         answer.id,
         answer.email,
     );
     newNewHireMemberData.push(newManager);
+// If intern has been selected than proceed to answer these questions.
 
-}
+}else if (answer.role === "Intern") {
+    const internAnswer = 
+     inquirer.prompt([
+        {
+        type: "input",
+        name: "school",
+        message: "Enter in the name of the university you attented.",
+        },  
+    ])
+
+    const newIntern = new Intern(
+        answer.name,
+        internAnswer.school,
+        answer.id,
+        answer.email,
+    );
+    newNewHireMemberData.push(newIntern)
+    ;
+    
+    }; //End of question
+    
+    const addNewMemberAnswer = inquirer
+    .prompt([
+        {
+            type: "list",
+            name: "addNewMember",
+            message: "Please choose the following option.",
+            choices: ["Create a team", "Add new member"]
+        }
+    ])
+
+    if(addNewMemberAnswer.addNewMember === "Add new member") {
+    
+    }
+    // return createTeam ();
+
+    
+    const createTeam = () => {
+        console.log ("new member", newStaffMemberData)
+        fs.writeFileSync("./front-end/index.html", generareTeam(newstaffMemberData),"utf-8"
+        );
+    }
