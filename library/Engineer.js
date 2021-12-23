@@ -1,4 +1,6 @@
-class Engineer {
+const currentHire = require("./currentHire");
+
+class Engineer extends currentHire {
   constructor (id, name, email, github) {
     super (id, name, email)
     this.github= github
