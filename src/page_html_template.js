@@ -1,8 +1,30 @@
 
-// Export function to generate entire page
+// This file generates the HTML code for the app
 
-// The parameter for this function is the data that was collected by the Node.js prompts
+// Generate the HTML code for an employee card
+// The parameter "data" for this function is the data that was collected by the Node.js prompts in index.js
+let generateEmployee = (data) => {
+    return `
+        <div class='employee'>
+            <h2>${data.name}</h2>
+            <h3>Position:</h3>
+            <ul>
+                <li>ID:</li>
+                <li>Email:<a href="mailto:${data.email}"> ${data.email}</a></li>
+                <li>Misc:</li>
+            </ul>
+        </div>
+    `;
+}
+
+
+// The parameter "data" for this function is the data that was collected by the Node.js prompts in index.js
 let htmlCode = (data) => {
+
+    // Get the HTML code for an employee card by using the function that's generated above
+    // The code that's collected will be used further down this function
+    let html = generateEmployee(data);
+    
     return `
 <!DOCTYPE html>
   <html lang="en">
@@ -29,15 +51,15 @@ let htmlCode = (data) => {
       <div class="container">
           <div class="row">
               <div class="team-area col-12 d-flex justify-content-center">
-                  <h1>${data.title}</h1>
-                  <p>${data.description}</p>
+                  ${html}
               </div>
           </div>
       </div>
   </body>
   </html>
       `;
-  };
+};
 
+// The generated code will be sent to index.js
 module.exports = htmlCode;
   
