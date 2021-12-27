@@ -14,8 +14,8 @@ const Manager = require('./library/Manager.js');
 const newStaffData = [];
 
 //Array of questions asked to users
-const questions = () => {
-  const answer =   
+const questions  = async () => {
+  const answer =   await
    inquirer.prompt([
         {
             type: "input",
@@ -37,14 +37,18 @@ const questions = () => {
             message: "Please select your role.",
             choices: ["Intern", "Engineer", "Manager"],
         },
-    ]).then(answer => {
+    ])
         console.log(answer);
-    })
+        positionQs (answer);
+
+         questions();
+   
 }
-    questions()
+questions()
 
+const positionQs = async (answer) => {
 
-// If intern has been selected than proceed to answer these questions
+    // If intern has been selected than proceed to answer these questions
 if (answer.role === "Engineer") {
     const githubAnswer = inquirer
     .prompt([
@@ -81,6 +85,8 @@ if (answer.role === "Engineer") {
         answer.email,
     );
     newNewHireMemberData.push(newManager);
+
+
 // If intern has been selected than proceed to answer these questions.
 
 }else if (answer.role === "Intern") {
@@ -100,28 +106,36 @@ if (answer.role === "Engineer") {
         answer.email,
     );
     newNewHireMemberData.push(newIntern)
-    ;
     
+    
+}
+
     }; //End of question
     
-    const addNewMemberAnswer = inquirer
-    .prompt([
-        {
-            type: "list",
-            name: "addNewMember",
-            message: "Please choose the following option.",
-            choices: ["Create a team", "Add new member"]
-        }
-    ])
+    const addNewMemberAnswer = async() => {
+         const addNewMemberAnswer2 = inquirer
+        .prompt([
+            {
+                type: "list",
+                name: "addNewMember",
+                message: "Please choose the following option.",
+                choices: ["Create a team", "Add new member"]
+            },
+    
+     ]).then()
 
+     addNewMemberAnswer2()
+     
     if(addNewMemberAnswer.addNewMember === "Add new member") {
     
-    }
-    // return createTeam ();
-
+ }
+    questions()
     
-    const createTeam = () => {
-        console.log ("new member", newStaffMemberData)
-        fs.writeFileSync("./front-end/index.html", generareTeam(newstaffMemberData),"utf-8"
-        );
+ const createTeam = () => {
+    console.log ("new member", newStaffMemberData)
+    fs.writeFileSync("./front-end/index.html", generareTeam(newstaffMemberData),"utf-8"
+    );
+}  
+return createTeam
+
     }
